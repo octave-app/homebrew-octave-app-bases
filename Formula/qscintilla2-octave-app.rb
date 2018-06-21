@@ -54,8 +54,8 @@ class Qscintilla2OctaveApp < Formula
                            "--qsci-incdir=#{include}",
                            "--qsci-libdir=#{lib}",
                            "--pyqt=PyQt5",
-                           "--pyqt-sipdir=#{Formula["pyqt"].opt_share}/sip/Qt5",
-                           "--sip-incdir=#{Formula["sip"].opt_include}",
+                           "--pyqt-sipdir=#{Formula["pyqt-octave-app"].opt_share}/sip/Qt5",
+                           "--sip-incdir=#{Formula["sip-octave-app"].opt_include}",
                            "--spec=#{spec}"
           system "make"
           system "make", "install"
