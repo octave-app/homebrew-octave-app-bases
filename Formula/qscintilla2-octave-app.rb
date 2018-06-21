@@ -7,14 +7,14 @@ class Qscintilla2OctaveApp < Formula
   sha256 "0353e694a67081e2ecdd7c80e1a848cf79a36dbba78b2afa36009482149b022d"
 
   option "with-plugin", "Build the Qt Designer plugin"
-  option "without-python", "Do not build Python3 bindings"
-  option "without-python2", "Do not build Python2 bindings"
+  option "with-python", "Build Python3 bindings"
+  option "with-python2", "Build Python2 bindings"
 
-  depends_on "pyqt-octave-app"
+  #depends_on "pyqt-octave-app"
   depends_on "qt"
-  depends_on "sip-octave-app"
+  #depends_on "sip-octave-app"
   depends_on "python" => :optional
-  depends_on "python2" => :recommended
+  depends_on "python2" => :optional
 
   def install
     spec = (ENV.compiler == :clang && MacOS.version >= :mavericks) ? "macx-clang" : "macx-g++"
