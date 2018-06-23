@@ -58,7 +58,7 @@ class OctaveHead < Formula
   depends_on "qrupdate"
   depends_on "readline"
   depends_on "suite-sparse"
-  depends_on "sundials27"
+  depends_on "sundials27-octave-app"
   depends_on "texinfo" # http://lists.gnu.org/archive/html/octave-maintainers/2018-01/msg00016.html
   depends_on "veclibfort"
   depends_on :java => ["1.8", :recommended]
