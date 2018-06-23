@@ -10,8 +10,8 @@ class Qscintilla2OctaveApp < Formula
   option "with-python", "Build Python3 bindings"
   option "with-python2", "Build Python2 bindings"
 
-  #depends_on "pyqt-octave-app"
-  depends_on "qt-octave-app"
+  #depends_on "pyqt"
+  depends_on "qt"
   #depends_on "sip-octave-app"
   depends_on "python" => :optional
   depends_on "python2" => :optional
@@ -54,7 +54,7 @@ class Qscintilla2OctaveApp < Formula
                            "--qsci-incdir=#{include}",
                            "--qsci-libdir=#{lib}",
                            "--pyqt=PyQt5",
-                           "--pyqt-sipdir=#{Formula["pyqt-octave-app"].opt_share}/sip/Qt5",
+                           "--pyqt-sipdir=#{Formula["pyqt"].opt_share}/sip/Qt5",
                            "--sip-incdir=#{Formula["sip-octave-app"].opt_include}",
                            "--spec=#{spec}"
           system "make"

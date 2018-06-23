@@ -10,7 +10,7 @@ class PyqtOctaveApp < Formula
 
   deprecated_option "enable-debug" => "with-debug"
 
-  depends_on "qt-octave-app"
+  depends_on "qt"
   depends_on "sip-octave-app"
   depends_on "python" => :optional
   depends_on "python2" => :recommended
