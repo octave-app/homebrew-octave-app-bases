@@ -8,7 +8,7 @@ class SipOctaveApp < Formula
   head "https://www.riverbankcomputing.com/hg/sip", :using => :hg
 
   depends_on "python" => :optional
-  depends_on "python2" => :recommended
+  depends_on "python2" => :optional
 
   def install
     ENV.prepend_path "PATH", Formula["python2"].opt_libexec/"bin"
