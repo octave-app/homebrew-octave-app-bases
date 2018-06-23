@@ -12,7 +12,7 @@ class GnuplotOctaveApp < Formula
     depends_on "libtool" => :build
   end
 
-  option "without-cairo", "Build without the Cairo based terminals"
+  option "with-cairo", "Build without the Cairo based terminals"
   option "without-lua", "Build without the lua/TikZ terminal"
   option "with-wxmac", "Build wxmac support. Need with-cairo to build wxt terminal"
   option "with-aquaterm", "Build with AquaTerm support"
@@ -24,7 +24,7 @@ class GnuplotOctaveApp < Formula
   deprecated_option "nolua" => "without-lua"
 
   depends_on "pkg-config" => :build
-  depends_on "cairo"
+  depends_on "cairo" => :optional
   depends_on "gd"
   depends_on "readline"
   depends_on "lua" => :recommended
