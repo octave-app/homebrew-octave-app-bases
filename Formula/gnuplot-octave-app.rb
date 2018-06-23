@@ -25,7 +25,7 @@ class GnuplotOctaveApp < Formula
   deprecated_option "nolua" => "without-lua"
 
   depends_on "pkg-config" => :build
-  depends_on "cairo" => :recommended
+  depends_on "cairo"
   depends_on "gd"
   depends_on "readline"
   depends_on "lua" => :recommended
