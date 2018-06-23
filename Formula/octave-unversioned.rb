@@ -135,7 +135,7 @@ class OctaveUnversioned < Formula
     # fix aclocal version issue
     system "autoreconf", "-f", "-i"
     system "./configure", *args
-    system "make", "all"
+    system "make", "all", "GHOSTSCRIPT=#{Formula["ghostscript"].opt_bin}/gs"
 
     if build.with? "test"
       system "make check 2>&1 | tee \"test/make-check.log\""
