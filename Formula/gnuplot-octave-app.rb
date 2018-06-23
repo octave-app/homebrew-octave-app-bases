@@ -12,15 +12,14 @@ class GnuplotOctaveApp < Formula
     depends_on "libtool" => :build
   end
 
-  option "with-cairo", "Build the Cairo based terminals"
+  option "without-cairo", "Build without the Cairo based terminals"
   option "without-lua", "Build without the lua/TikZ terminal"
   option "with-wxmac", "Build wxmac support. Need with-cairo to build wxt terminal"
   option "with-aquaterm", "Build with AquaTerm support"
+  option "without-qt", "Build without Qt support"
 
   deprecated_option "with-x" => "with-x11"
   deprecated_option "wx" => "with-wxmac"
-  deprecated_option "qt" => "with-qt"
-  deprecated_option "with-qt5" => "with-qt"
   deprecated_option "cairo" => "with-cairo"
   deprecated_option "nolua" => "without-lua"
 
@@ -30,7 +29,7 @@ class GnuplotOctaveApp < Formula
   depends_on "readline"
   depends_on "lua" => :recommended
   depends_on "pango" if build.with?("cairo") || build.with?("wxmac")
-  depends_on "qt-octave-app" => :recommended
+  depends_on "qt-octave-app" if build.with?("qt")
   depends_on "wxmac" => :optional
   depends_on :x11 => :optional
 
