@@ -1,3 +1,5 @@
+# GNU Octave, Qt-enabled, with build customized for Octave.app
+#
 # This version of Octave is kept at the current version. It is only
 # used for grabbing the dependencies of Octave; it is not used for
 # building Octave.app itself. The versioned octave formulae are used
@@ -18,7 +20,7 @@ class MacTeXRequirement < Requirement
   end
 end
 
-class OctaveUnversioned < Formula
+class OctaveOctaveApp < Formula
   desc "High-level interpreted language for numerical computing"
   homepage "https://www.gnu.org/software/octave/index.html"
   url "ftp://ftp.gnu.org/gnu/octave/octave-4.4.0.tar.lz"
