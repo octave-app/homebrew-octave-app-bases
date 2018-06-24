@@ -10,7 +10,7 @@ class PyqtOctaveApp < Formula
 
   deprecated_option "enable-debug" => "with-debug"
 
-  depends_on "qt"
+  depends_on "qt-octave-app"
   depends_on "sip-octave-app"
   depends_on "python" => :optional
   depends_on "python2" => :recommended
@@ -31,7 +31,7 @@ class PyqtOctaveApp < Formula
               "--sipdir=#{share}/sip/Qt5",
               # sip.h could not be found automatically
               "--sip-incdir=#{Formula["sip-octave-app"].opt_include}",
-              "--qmake=#{Formula["qt"].bin}/qmake",
+              "--qmake=#{Formula["qt-octave-app"].bin}/qmake",
               # Force deployment target to avoid libc++ issues
               "QMAKE_MACOSX_DEPLOYMENT_TARGET=#{MacOS.version}",
               "--qml-plugindir=#{pkgshare}/plugins",

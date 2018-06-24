@@ -29,7 +29,7 @@ class GnuplotOctaveApp < Formula
   depends_on "readline"
   depends_on "lua" => :recommended
   depends_on "pango" if build.with?("cairo") || build.with?("wxmac")
-  depends_on "qt" if build.with?("qt")
+  depends_on "qt-octave-app" if build.with?("qt")
   depends_on "wxmac" => :optional
   depends_on :x11 => :optional
 
