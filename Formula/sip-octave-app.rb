@@ -7,6 +7,8 @@ class SipOctaveApp < Formula
   revision 3
   head "https://www.riverbankcomputing.com/hg/sip", :using => :hg
 
+  keg_only "conflicts with regular sip"
+
   depends_on "python" => :optional
   depends_on "python2" => :optional
 
