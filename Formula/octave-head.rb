@@ -39,7 +39,6 @@ class OctaveHead < Formula
   depends_on "epstool"
   depends_on "fftw"
   depends_on "fig2dev"
-  depends_on "fltk"
   depends_on "fontconfig"
   depends_on "freetype"
   depends_on "ghostscript"
@@ -103,6 +102,7 @@ class OctaveHead < Formula
       "--enable-shared",
       "--disable-static",
       "--without-osmesa",
+      "--without-fltk",
       "--with-hdf5-includedir=#{Formula["hdf5"].opt_include}",
       "--with-hdf5-libdir=#{Formula["hdf5"].opt_lib}",
       "--with-x=no",
