@@ -82,6 +82,13 @@ class OctaveHead < Formula
     patch :DATA
   end
 
+  # Experimental patch for Java char[] boxing segfault
+  # see https://savannah.gnu.org/bugs/index.php?54170
+  patch do
+    url "https://gist.githubusercontent.com/apjanke/da92f70978aa8db01f484c782aed89a9/raw/37e18bf40da77dedbab6b5a02cb28dd142bb9cc3/fix-java-char-boxing-segfault.patch"
+    sha256 "db4979c2f0508fb9ad85b73c88f200015a112f6b3493838a17cc7ad7e0473009"
+  end
+
   # Dependencies use Fortran, leading to spurious messages about GCC
   cxxstdlib_check :skip
 
