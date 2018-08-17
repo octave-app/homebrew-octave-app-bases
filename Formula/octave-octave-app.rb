@@ -23,8 +23,8 @@ end
 class OctaveOctaveApp < Formula
   desc "High-level interpreted language for numerical computing"
   homepage "https://www.gnu.org/software/octave/index.html"
-  url "ftp://ftp.gnu.org/gnu/octave/octave-4.4.0.tar.lz"
-  sha256 "777542ca425f3e7eddb3b31810563eaf8d690450a4f88c79c273bd338e31a75a"
+  url "ftp://ftp.gnu.org/gnu/octave/octave-4.4.1.tar.lz"
+  sha256 "1e6e3a72b4fd4b4db73ccb9f3046e4f727201c2e934b77afb04a804d7f7c4d4b"
 
   option "without-qt", "Compile without qt-based graphical user interface"
   option "without-docs", "Skip documentation (requires MacTeX)"
@@ -73,15 +73,6 @@ class OctaveOctaveApp < Formula
     patch do
       url "https://savannah.gnu.org/support/download.php?file_id=44041"
       sha256 "bf7aaa6ddc7bd7c63da24b48daa76f5bdf8ab3a2f902334da91a8d8140e39ff0"
-    end
-
-    # add Qt include needed to build against Qt 5.11 (bug #53978)
-    # should be fixed in >4.4.0 
-    if build.stable?
-      patch do
-        url "https://hg.savannah.gnu.org/hgweb/octave/raw-rev/cdaa884568b1"
-        sha256 "223f12fafc755d0084ff237a215766bc646db89c97a9f6e3a3644196b467a1c4"
-      end
     end
 
     # Fix bug #50025: Octave window freezes

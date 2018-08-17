@@ -28,8 +28,8 @@ end
 class OctaveFltk < Formula
   desc "High-level interpreted language for numerical computing"
   homepage "https://www.gnu.org/software/octave/index.html"
-  url "ftp://ftp.gnu.org/gnu/octave/octave-4.4.0.tar.lz"
-  sha256 "777542ca425f3e7eddb3b31810563eaf8d690450a4f88c79c273bd338e31a75a"
+  url "ftp://ftp.gnu.org/gnu/octave/octave-4.4.1.tar.lz"
+  sha256 "1e6e3a72b4fd4b4db73ccb9f3046e4f727201c2e934b77afb04a804d7f7c4d4b"
 
   option "without-qt", "Compile without qt-based graphical user interface"
   option "without-docs", "Skip documentation (requires MacTeX)"
