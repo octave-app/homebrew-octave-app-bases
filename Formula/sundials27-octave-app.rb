@@ -7,6 +7,8 @@ class Sundials27OctaveApp < Formula
   mirror "https://computation.llnl.gov/projects/sundials/download/sundials-2.7.0.tar.gz"
   sha256 "d39fcac7175d701398e4eb209f7e92a5b30a78358d4a0c0fcc23db23c11ba104"
 
+  keg_only "conflicts with regular sundials"
+
   option "with-openmp", "Enable OpenMP multithreading"
   option "without-mpi", "Do not build with MPI"
 
@@ -16,8 +18,6 @@ class Sundials27OctaveApp < Formula
   depends_on "open-mpi" if build.with? "mpi"
   depends_on "suite-sparse"
   depends_on "openblas"
-
-  conflicts_with "sundials", :because => "this is an older version"
 
   fails_with :clang if build.with? "openmp"
 
