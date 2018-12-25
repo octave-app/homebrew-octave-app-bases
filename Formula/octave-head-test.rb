@@ -1,4 +1,9 @@
-# A TEST version of octave-head, for testing out a `brew` bug
+# A TEST version of octave-head, for testing the Octave build.
+#
+# This version of the formula builds against regular Qt, so it can
+# use the Homebrew core bottle and avoid the hour-long Qt build.
+# It's not for presentation to end users, because it lacks some of
+# Octave.app's normal patches.
 
 class MacTeXRequirement < Requirement
   fatal true
@@ -16,24 +21,24 @@ end
 class OctaveHeadTest < Formula
   desc "High-level interpreted language for numerical computing"
   homepage "https://www.gnu.org/software/octave/index.html"
-  url "https://hg.savannah.gnu.org/hgweb/octave", :branch => "default", :using => :hg
-  version "HEAD"
+  head "https://hg.savannah.gnu.org/hgweb/octave", :branch => "default", :using => :hg
+  #version "HEAD"
 
   option "without-qt", "Compile without qt-based graphical user interface"
   option "without-docs", "Skip documentation (requires MacTeX)"
   option "with-test", "Do compile-time make checks"
 
   # Complete list of dependencies at https://wiki.octave.org/Building
-  depends_on "automake" => :build
   depends_on "autoconf" => :build
-  depends_on "gnu-sed" => :build # https://lists.gnu.org/archive/html/octave-maintainers/2016-09/msg00193.html
-  depends_on "pkg-config" => :build
-  # Head-specific build dependencies
-  depends_on "mercurial" => :build
+  depends_on "automake" => :build
   depends_on "bison" => :build
   depends_on "doxygen" => :build
+  depends_on "gnu-sed" => :build # https://lists.gnu.org/archive/html/octave-maintainers/2016-09/msg00193.html
   depends_on "icoutils" => :build
   depends_on "librsvg" => :build
+  depends_on "mercurial" => :build
+  depends_on "pkg-config" => :build
+  # Head-specific build dependencies
   depends_on "arpack"
   depends_on "epstool"
   depends_on "fftw"
@@ -43,12 +48,13 @@ class OctaveHeadTest < Formula
   depends_on "ghostscript"
   depends_on "gl2ps"
   depends_on "glpk"
-  depends_on "gnuplot"
   depends_on "gnu-tar"
+  depends_on "gnuplot"
   depends_on "graphicsmagick"
   depends_on "hdf5"
   depends_on "libsndfile"
   depends_on "libtool"
+  depends_on MacTeXRequirement if build.with?("docs")
   depends_on "pcre"
   depends_on "portaudio"
   depends_on "pstoedit"
@@ -60,9 +66,11 @@ class OctaveHeadTest < Formula
   depends_on "texinfo" # http://lists.gnu.org/archive/html/octave-maintainers/2018-01/msg00016.html
   depends_on "veclibfort"
   depends_on :java => ["1.8", :recommended]
-  depends_on MacTeXRequirement if build.with?("docs")
 
   conflicts_with "octave", :because => "both install the same package"
+
+  # Dependencies use Fortran, leading to spurious messages about GCC
+  cxxstdlib_check :skip
 
   # Dependencies for the graphical user interface
   if build.with?("qt")
@@ -71,10 +79,10 @@ class OctaveHeadTest < Formula
 
     # Fix bug #49053: retina scaling of figures
     # see https://savannah.gnu.org/bugs/?49053
-    patch do
-      url "https://savannah.gnu.org/support/download.php?file_id=44041"
-      sha256 "bf7aaa6ddc7bd7c63da24b48daa76f5bdf8ab3a2f902334da91a8d8140e39ff0"
-    end
+    #patch do
+    #  url "https://savannah.gnu.org/support/download.php?file_id=44041"
+    #  sha256 "bf7aaa6ddc7bd7c63da24b48daa76f5bdf8ab3a2f902334da91a8d8140e39ff0"
+    #end
 
     # Fix bug #50025: Octave window freezes
     # see https://savannah.gnu.org/bugs/?50025
@@ -87,9 +95,6 @@ class OctaveHeadTest < Formula
     url "https://gist.githubusercontent.com/apjanke/da92f70978aa8db01f484c782aed89a9/raw/37e18bf40da77dedbab6b5a02cb28dd142bb9cc3/fix-java-char-boxing-segfault.patch"
     sha256 "db4979c2f0508fb9ad85b73c88f200015a112f6b3493838a17cc7ad7e0473009"
   end
-
-  # Dependencies use Fortran, leading to spurious messages about GCC
-  cxxstdlib_check :skip
 
   def install
     # do not execute a test that may trigger a dialog to install java
