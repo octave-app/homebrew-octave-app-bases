@@ -1,8 +1,8 @@
 class GnuplotOctaveApp < Formula
   desc "Command-driven, interactive function plotting"
   homepage "http://www.gnuplot.info/"
-  url "https://downloads.sourceforge.net/project/gnuplot/gnuplot/5.2.4/gnuplot-5.2.4.tar.gz"
-  sha256 "1515f000bd373aaa53b16183f274189d4f5e0ae47d22f434857933d16a4770cb"
+  url "https://downloads.sourceforge.net/project/gnuplot/gnuplot/5.2.5/gnuplot-5.2.5.tar.gz"
+  sha256 "039db2cce62ddcfd31a6696fe576f4224b3bc3f919e66191dfe2cdb058475caa"
 
   head do
     url "https://git.code.sf.net/p/gnuplot/gnuplot-main.git"
@@ -14,10 +14,8 @@ class GnuplotOctaveApp < Formula
 
   keg_only "conflicts with regular gnuplot"
 
-  #option "without-cairo", "Build without the Cairo based terminals"
-  option "without-lua", "Build without the lua/TikZ terminal"
-  option "with-wxmac", "Build wxmac support. Need with-cairo to build wxt terminal"
   option "with-aquaterm", "Build with AquaTerm support"
+  option "with-wxmac", "Build wxmac support. Need with-cairo to build wxt terminal"
   option "without-qt", "Build without Qt support"
 
   deprecated_option "with-x" => "with-x11"
@@ -81,7 +79,6 @@ class GnuplotOctaveApp < Formula
       args << "--with-qt=no"
     end
 
-    args << "--without-lua" if build.without? "lua"
     args << (build.with?("aquaterm") ? "--with-aquaterm" : "--without-aquaterm")
     args << (build.with?("x11") ? "--with-x" : "--without-x")
 
