@@ -21,8 +21,9 @@ end
 class OctaveHeadTest < Formula
   desc "High-level interpreted language for numerical computing"
   homepage "https://www.gnu.org/software/octave/index.html"
+  url "https://hg.savannah.gnu.org/hgweb/octave", :branch => "stable", :using => :hg
+  version "5.0.0-SNAPSHOT"
   head "https://hg.savannah.gnu.org/hgweb/octave", :branch => "default", :using => :hg
-  #version "HEAD"
 
   option "without-qt", "Compile without qt-based graphical user interface"
   option "without-docs", "Skip documentation (requires MacTeX)"
