@@ -103,6 +103,10 @@ class OctaveHeadTest < Formula
     ENV.append "CXXFLAGS", "-I#{Formula["qscintilla2"].opt_include}"
     ENV.append "LDFLAGS", "-L#{Formula["qscintilla2"].opt_lib}"
 
+    # Qt 5.12 merged qcollectiongenerator into qhelpgenerator, and Octave's
+    # source hasn't been updated to auto-detect this yet.
+    ENV['QCOLLECTIONGENERATOR']='qhelpgenerator'
+
     args = [
       "--prefix=#{prefix}",
       "--disable-dependency-tracking",
