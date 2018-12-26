@@ -134,7 +134,9 @@ class OctaveHeadTest < Formula
       ENV['QCOLLECTIONGENERATOR']='qhelpgenerator'
       # And we need some new linker flags
       ENV['QT_CPPFLAGS']="-I#{Formula["qt"].opt_include}"
+      ENV.append 'CPPFLAGS', "-I#{Formula["qt"].opt_include}"
       ENV['QT_LDFLAGS']="-F#{Formula["qt"].opt_lib}"
+      ENV.append 'LDFLAGS', "-F#{Formula["qt"].opt_lib}"
     end
 
     if build.without? "docs"
