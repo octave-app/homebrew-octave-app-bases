@@ -3,11 +3,11 @@
 class QtOctaveApp < Formula
   desc "Cross-platform application and UI framework"
   homepage "https://www.qt.io/"
-  url "https://download.qt.io/official_releases/qt/5.11/5.11.1/single/qt-everywhere-src-5.11.1.tar.xz"
-  mirror "https://qt.mirror.constant.com/archive/qt/5.11/5.11.1/single/qt-everywhere-src-5.11.1.tar.xz"
-  mirror "http://qt.mirrors.tds.net/qt/archive/qt/5.11/5.11.1/single/qt-everywhere-src-5.11.1.tar.xz"
-  sha256 "39602cb08f9c96867910c375d783eed00fc4a244bffaa93b801225d17950fb2b"
-  head "https://code.qt.io/qt/qt5.git", :branch => "5.11", :shallow => false
+  url "https://download.qt.io/official_releases/qt/5.12/5.12.0/single/qt-everywhere-src-5.12.0.tar.xz"
+  mirror "https://qt.mirror.constant.com/archive/qt/5.12/5.12.0/single/qt-everywhere-src-5.12.0.tar.xz"
+  mirror "https://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-src-5.12.0.tar.xz"
+  sha256 "356f42d9087718f22f03d13d0c2cdfb308f91dc3cf0c6318bed33f2094cd9d6c"
+  head "https://code.qt.io/qt/qt5.git", :branch => "5.12", :shallow => false
 
   keg_only "Qt 5 has CMake issues when linked"
 
@@ -54,6 +54,7 @@ class QtOctaveApp < Formula
       -no-rpath
       -pkg-config
       -dbus-runtime
+      -proprietary-codecs
     ]
 
     args << "-nomake" << "examples" if build.without? "examples"
