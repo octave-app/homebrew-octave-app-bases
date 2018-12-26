@@ -67,6 +67,8 @@ class OctaveHeadTest < Formula
   depends_on "veclibfort"
   depends_on :java => ["1.8", :recommended]
 
+  depends_on "qt" => :recommended
+
   conflicts_with "octave", :because => "both install the same package"
 
   # Dependencies use Fortran, leading to spurious messages about GCC
@@ -74,7 +76,6 @@ class OctaveHeadTest < Formula
 
   # Dependencies for the graphical user interface
   if build.with?("qt")
-    depends_on "qt"
     depends_on "qscintilla2"
 
     # Fix bug #50025: Octave window freezes
@@ -103,10 +104,6 @@ class OctaveHeadTest < Formula
     ENV.append "CXXFLAGS", "-I#{Formula["qscintilla2"].opt_include}"
     ENV.append "LDFLAGS", "-L#{Formula["qscintilla2"].opt_lib}"
 
-    # Qt 5.12 merged qcollectiongenerator into qhelpgenerator, and Octave's
-    # source hasn't been updated to auto-detect this yet.
-    ENV['QCOLLECTIONGENERATOR']='qhelpgenerator'
-
     args = [
       "--prefix=#{prefix}",
       "--disable-dependency-tracking",
@@ -132,6 +129,12 @@ class OctaveHeadTest < Formula
       args << "--without-qt"
     else
       args << "--with-qt=5"
+      # Qt 5.12 merged qcollectiongenerator into qhelpgenerator, and Octave's
+      # source hasn't been updated to auto-detect this yet.
+      ENV['QCOLLECTIONGENERATOR']='qhelpgenerator'
+      # And we need some new linker flags
+      ENV['QT_CPPFLAGS']="-I#{Formula["qt"].opt_include}"
+      ENV['QT_LDFLAGS']="-F#{Formula["qt"].opt_lib}"
     end
 
     if build.without? "docs"
@@ -170,7 +173,7 @@ class OctaveHeadTest < Formula
         f.write("<?xml version=\"1.0\" encoding=\"utf-8\" ?>")
         f.write("<QHelpCollectionProject version=\"1.0\" />")
       end
-      system "#{Formula["qt-octave-app"].opt_bin}/qhelpgenerator", "doc/octave_interpreter.qhcp", "-o", "doc/octave_interpreter.qhc"
+      system "#{Formula["qt"].opt_bin}/qhelpgenerator", "doc/octave_interpreter.qhcp", "-o", "doc/octave_interpreter.qhc"
       (pkgshare/"#{version}/doc").install "doc/octave_interpreter.qhc"
     end
   end
