@@ -80,7 +80,10 @@ class OctaveHeadTest < Formula
 
     # Fix bug #50025: Octave window freezes
     # see https://savannah.gnu.org/bugs/?50025
-    patch :DATA
+    patch do
+      url "https://savannah.gnu.org/support/download.php?file_id=45382"
+      sha256 "e179c3a0e53f6f0f4a48b5adafd18c0f9c33de276748b8049c7d1007282f7f6e"
+    end
   end
 
   # Experimental patch for Java char[] boxing segfault
@@ -189,27 +192,3 @@ class OctaveHeadTest < Formula
   end
 end
 
-__END__
-diff --git a/libgui/src/main-window.cc b/libgui/src/main-window.cc
---- a/libgui/src/main-window.cc
-+++ b/libgui/src/main-window.cc
-@@ -221,9 +221,6 @@
-              this, SLOT (handle_octave_ready (void)));
- 
-     connect (m_interpreter, SIGNAL (octave_finished_signal (int)),
-              this, SLOT (handle_octave_finished (int)));
--
--    connect (m_interpreter, SIGNAL (octave_finished_signal (int)),
--             m_main_thread, SLOT (quit (void)));
- 
-     connect (m_main_thread, SIGNAL (finished (void)),
-@@ -1536,6 +1533,9 @@
- 
-   void main_window::handle_octave_finished (int exit_status)
-   {
-+    /* fprintf to stderr is needed by macOS */
-+    fprintf(stderr, "\n");
-+    m_main_thread->quit();
-     qApp->exit (exit_status);
-   }
- 
