@@ -84,6 +84,12 @@ class OctaveHeadTest < Formula
       url "https://savannah.gnu.org/support/download.php?file_id=45382"
       sha256 "e179c3a0e53f6f0f4a48b5adafd18c0f9c33de276748b8049c7d1007282f7f6e"
     end
+
+    # Fix bug #55268: crash during build
+    patch do
+      url "https://savannah.gnu.org/bugs/download.php?file_id=45733"
+      sha256 "d7937a083af72d74f073c9dbc59feab178e00ca0ce952f61fa3430b9eafaa2e1"
+    end
   end
 
   # Experimental patch for Java char[] boxing segfault
