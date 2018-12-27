@@ -87,6 +87,7 @@ class OctaveHeadTest < Formula
     end
 
     # Fix bug #55268: crash during build
+    # see https://savannah.gnu.org/bugs/index.php?55268
     patch do
       url "https://savannah.gnu.org/bugs/download.php?file_id=45733"
       sha256 "d7937a083af72d74f073c9dbc59feab178e00ca0ce952f61fa3430b9eafaa2e1"
@@ -113,6 +114,8 @@ class OctaveHeadTest < Formula
     ENV.append "CXXFLAGS", "-I#{Formula["sundials27-octave-app"].opt_include}"
     ENV.append "CXXFLAGS", "-I#{Formula["qscintilla2"].opt_include}"
     ENV.append "LDFLAGS", "-L#{Formula["qscintilla2"].opt_lib}"
+    # Work around gnulib mkfifo detection issue
+    ENV.append "CPPFLAGS", "-DHAVE_MKFIFO"
 
     args = [
       "--prefix=#{prefix}",
