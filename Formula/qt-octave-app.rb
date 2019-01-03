@@ -22,17 +22,6 @@ class QtOctaveApp < Formula
   depends_on "mysql-client" => :optional
   depends_on "postgresql" => :optional
 
-  # Restore `.pc` files for framework-based build of Qt 5 on macOS, partially
-  # reverting <https://codereview.qt-project.org/#/c/140954/>
-  # Core formulae known to fail without this patch (as of 2016-10-15):
-  #   * gnuplot (with `--with-qt` option)
-  #   * mkvtoolnix (with `--with-qt` option, silent build failure)
-  #   * poppler (with `--with-qt` option)
-  patch do
-    url "https://raw.githubusercontent.com/Homebrew/formula-patches/e8fe6567/qt5/restore-pc-files.patch"
-    sha256 "48ff18be2f4050de7288bddbae7f47e949512ac4bcd126c2f504be2ac701158b"
-  end
-
   # Disable FSEventStreamFlushSync to avoid warnings in the GUI
   patch do
     url "https://raw.githubusercontent.com/octave-app/formula-patches/0ffa4aa98468b2355b5cc4424ed41cf869a0ee58/qt/disable-FSEventStreamFlushSync.patch"
