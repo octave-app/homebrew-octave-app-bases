@@ -39,7 +39,6 @@ class OctaveHeadTest < Formula
   depends_on "librsvg" => :build
   depends_on "mercurial" => :build
   depends_on "pkg-config" => :build
-  # Head-specific build dependencies
   depends_on "arpack"
   depends_on "epstool"
   depends_on "fftw"
