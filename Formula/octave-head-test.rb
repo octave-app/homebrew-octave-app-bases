@@ -121,7 +121,6 @@ class OctaveHeadTest < Formula
       "--enable-link-all-dependencies",
       "--enable-shared",
       "--disable-static",
-      "--without-osmesa",
       "--without-fltk",
       "--with-hdf5-includedir=#{Formula["hdf5"].opt_include}",
       "--with-hdf5-libdir=#{Formula["hdf5"].opt_lib}",
