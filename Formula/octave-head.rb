@@ -20,6 +20,8 @@ class OctaveHead < Formula
   url "https://hg.savannah.gnu.org/hgweb/octave", :branch => "default", :using => :hg
   version "HEAD"
 
+  keg_only "so it can be installed alongside stable octave"
+
   option "without-qt", "Compile without qt-based graphical user interface"
   option "without-docs", "Skip documentation (requires MacTeX)"
   option "with-test", "Do compile-time make checks"
@@ -62,8 +64,6 @@ class OctaveHead < Formula
   depends_on "veclibfort"
   depends_on :java => ["1.8", :recommended]
   depends_on MacTeXRequirement if build.with?("docs")
-
-  conflicts_with "octave", :because => "both install the same package"
 
   # Dependencies for the graphical user interface
   if build.with?("qt")

@@ -25,6 +25,8 @@ class OctaveHeadTest < Formula
   version "5.0.0-SNAPSHOT"
   head "https://hg.savannah.gnu.org/hgweb/octave", :branch => "default", :using => :hg
 
+  keg_only "so it can be installed alongside stable octave"
+
   option "without-qt", "Compile without qt-based graphical user interface"
   option "without-docs", "Skip documentation (requires MacTeX)"
   option "with-test", "Do compile-time make checks"
@@ -68,8 +70,6 @@ class OctaveHeadTest < Formula
   depends_on :java => ["1.8", :recommended]
 
   depends_on "qt" => :recommended
-
-  conflicts_with "octave", :because => "both install the same package"
 
   # Dependencies use Fortran, leading to spurious messages about GCC
   cxxstdlib_check :skip
