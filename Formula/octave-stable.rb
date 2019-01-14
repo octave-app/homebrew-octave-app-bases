@@ -1,5 +1,7 @@
-# This is the HEAD version of Octave, used to build the latest
-# development code from the Octave repo.
+# This is the "stable" version of Octave, used to build the latest
+# "stable" development version from the Octave repo. This is different
+# from the release versions of Octave: "stable" doesn't mean a stable
+# release; it means the "stable" branch for the next upcoming release.
 #
 # This formula includes only patches that seriously affect the stability
 # and usability of Octave. It's intended for developers testing Octave,
@@ -18,11 +20,11 @@ class MacTeXRequirement < Requirement
   end
 end
 
-class OctaveHead < Formula
+class OctaveStable < Formula
   desc "High-level interpreted language for numerical computing"
   homepage "https://www.gnu.org/software/octave/index.html"
-  url "https://hg.savannah.gnu.org/hgweb/octave", :branch => "default", :using => :hg
-  version "HEAD"
+  url "https://hg.savannah.gnu.org/hgweb/octave", :branch => "stable", :using => :hg
+  version "stable"
 
   keg_only "so it can be installed alongside released octave"
 
@@ -31,16 +33,16 @@ class OctaveHead < Formula
   option "with-test", "Do compile-time make checks"
 
   # Complete list of dependencies at https://wiki.octave.org/Building
-  depends_on "autoconf" => :build
   depends_on "automake" => :build
   depends_on "autoconf" => :build
+  depends_on "gnu-sed" => :build # https://lists.gnu.org/archive/html/octave-maintainers/2016-09/msg00193.html
+  depends_on "pkg-config" => :build
+  # Head-specific build dependencies
+  depends_on "mercurial" => :build
   depends_on "bison" => :build
   depends_on "doxygen" => :build
-  depends_on "gnu-sed" => :build # https://lists.gnu.org/archive/html/octave-maintainers/2016-09/msg00193.html
   depends_on "icoutils" => :build
   depends_on "librsvg" => :build
-  depends_on "mercurial" => :build
-  depends_on "pkg-config" => :build
   depends_on "arpack"
   depends_on "epstool"
   depends_on "fftw"
@@ -50,8 +52,8 @@ class OctaveHead < Formula
   depends_on "ghostscript"
   depends_on "gl2ps"
   depends_on "glpk"
-  depends_on "gnu-tar"
   depends_on "gnuplot"
+  depends_on "gnu-tar"
   depends_on "graphicsmagick"
   depends_on "hdf5"
   depends_on "libsndfile"
@@ -101,10 +103,10 @@ class OctaveHead < Formula
     # cause linking problems.
     inreplace "src/mkoctfile.in.cc", /%OCTAVE_CONF_OCT(AVE)?_LINK_(DEPS|OPTS)%/, '""'
 
-    # Pick up keg-only libraries
-    ENV.append "CXXFLAGS", "-I#{Formula["sundials27-octave-app"].opt_include}"
-    ENV.append "CXXFLAGS", "-I#{Formula["qscintilla2"].opt_include}"
-    ENV.append "LDFLAGS", "-L#{Formula["qscintilla2"].opt_lib}"
+    # Pick up non-linked libraries
+    ENV.append "CXXFLAGS", "-I#{Formula["sundials27-octave-app_2.7.0"].opt_include}"
+    ENV.append "CXXFLAGS", "-I#{Formula["qscintilla2-octave-app"].opt_include}"
+    ENV.append "LDFLAGS", "-L#{Formula["qscintilla2-octave-app"].opt_lib}"
 
     args = [
       "--prefix=#{prefix}",
@@ -176,7 +178,7 @@ class OctaveHead < Formula
         f.write("<?xml version=\"1.0\" encoding=\"utf-8\" ?>")
         f.write("<QHelpCollectionProject version=\"1.0\" />")
       end
-      system "#{Formula["qt"].opt_bin}/qhelpgenerator", "doc/octave_interpreter.qhcp", "-o", "doc/octave_interpreter.qhc"
+      system "#{Formula["qt-octave-app"].opt_bin}/qhelpgenerator", "doc/octave_interpreter.qhcp", "-o", "doc/octave_interpreter.qhc"
       (pkgshare/"#{version}/doc").install "doc/octave_interpreter.qhc"
     end
   end
@@ -189,4 +191,3 @@ class OctaveHead < Formula
     system bin/"octave", "--eval", "try; javaclasspath; catch; quit(1); end;" if build.with? "java"
   end
 end
-

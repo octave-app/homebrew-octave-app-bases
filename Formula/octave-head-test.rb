@@ -4,6 +4,10 @@
 # use the Homebrew core bottle and avoid the hour-long Qt build.
 # It's not for presentation to end users, because it lacks some of
 # Octave.app's normal patches.
+#
+# This formula includes only patches that seriously affect the stability
+# and usability of Octave. It's intended for developers testing Octave,
+# not end users.
 
 class MacTeXRequirement < Requirement
   fatal true
@@ -21,11 +25,10 @@ end
 class OctaveHeadTest < Formula
   desc "High-level interpreted language for numerical computing"
   homepage "https://www.gnu.org/software/octave/index.html"
-  url "https://hg.savannah.gnu.org/hgweb/octave", :branch => "stable", :using => :hg
-  version "5.0.0-SNAPSHOT"
   head "https://hg.savannah.gnu.org/hgweb/octave", :branch => "default", :using => :hg
+  version "HEAD-TEST"
 
-  keg_only "so it can be installed alongside stable octave"
+  keg_only "so it can be installed alongside released octave"
 
   option "without-qt", "Compile without qt-based graphical user interface"
   option "without-docs", "Skip documentation (requires MacTeX)"
@@ -56,7 +59,6 @@ class OctaveHeadTest < Formula
   depends_on "hdf5"
   depends_on "libsndfile"
   depends_on "libtool"
-  depends_on MacTeXRequirement if build.with?("docs")
   depends_on "pcre"
   depends_on "portaudio"
   depends_on "pstoedit"
@@ -68,14 +70,14 @@ class OctaveHeadTest < Formula
   depends_on "texinfo" # http://lists.gnu.org/archive/html/octave-maintainers/2018-01/msg00016.html
   depends_on "veclibfort"
   depends_on :java => ["1.8", :recommended]
-
-  depends_on "qt" => :recommended
+  depends_on MacTeXRequirement if build.with?("docs")
 
   # Dependencies use Fortran, leading to spurious messages about GCC
   cxxstdlib_check :skip
 
   # Dependencies for the graphical user interface
   if build.with?("qt")
+    depends_on "qt"
     depends_on "qscintilla2"
 
     # Fix bug #50025: Octave window freezes
@@ -91,13 +93,6 @@ class OctaveHeadTest < Formula
       url "https://savannah.gnu.org/bugs/download.php?file_id=45733"
       sha256 "d7937a083af72d74f073c9dbc59feab178e00ca0ce952f61fa3430b9eafaa2e1"
     end
-  end
-
-  # Experimental patch for Java char[] boxing segfault
-  # see https://savannah.gnu.org/bugs/index.php?54170
-  patch do
-    url "https://gist.githubusercontent.com/apjanke/da92f70978aa8db01f484c782aed89a9/raw/37e18bf40da77dedbab6b5a02cb28dd142bb9cc3/fix-java-char-boxing-segfault.patch"
-    sha256 "db4979c2f0508fb9ad85b73c88f200015a112f6b3493838a17cc7ad7e0473009"
   end
 
   def install
@@ -142,6 +137,7 @@ class OctaveHeadTest < Formula
       # source hasn't been updated to auto-detect this yet.
       ENV['QCOLLECTIONGENERATOR']='qhelpgenerator'
       # And we need some new linker flags
+      # These "shouldn't" be necessary, but the build breaks if I don't include them.
       ENV['QT_CPPFLAGS']="-I#{Formula["qt"].opt_include}"
       ENV.append 'CPPFLAGS', "-I#{Formula["qt"].opt_include}"
       ENV['QT_LDFLAGS']="-F#{Formula["qt"].opt_lib}"
