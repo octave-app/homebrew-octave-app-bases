@@ -3,6 +3,7 @@ class LxqtBuildTools < Formula
   homepage "http://lxqt.org"
   url "https://github.com/lxqt/lxqt-build-tools/releases/download/0.5.0/lxqt-build-tools-0.5.0.tar.xz"
   sha256 "a66d080d4cf075007fcdd9eab1689559728418dd8f85f7e8e79679738de8658d"
+  head "https://github.com/lxqt/lxqt-build-tools.git"
   
   depends_on "cmake" => :build
   depends_on "pkg-config" => :build
