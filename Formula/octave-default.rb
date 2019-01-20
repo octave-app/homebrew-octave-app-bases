@@ -18,11 +18,12 @@ class MacTeXRequirement < Requirement
   end
 end
 
-class OctaveHead < Formula
+class OctaveDefault < Formula
   desc "High-level interpreted language for numerical computing"
   homepage "https://www.gnu.org/software/octave/index.html"
   url "https://hg.savannah.gnu.org/hgweb/octave", :branch => "default", :using => :hg
-  version "HEAD"
+  # "default" is what the Octave maintainers call their main development branch
+  version "default"
 
   keg_only "so it can be installed alongside released octave"
 
