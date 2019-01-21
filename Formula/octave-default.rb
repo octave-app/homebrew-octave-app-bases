@@ -94,6 +94,10 @@ class OctaveDefault < Formula
   cxxstdlib_check :skip
 
   def install
+    # Hack: synthesize an HG-ID
+    hg_id = cached_download.cd { `hg identify --id` }.chomp
+    Pathname.new("HG-ID").write "#{hg_id} + patches\n"
+
     # do not execute a test that may trigger a dialog to install java
     inreplace "libinterp/octave-value/ov-java.cc", "usejava (\"awt\")", "false ()"
 
