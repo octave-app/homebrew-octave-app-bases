@@ -104,7 +104,7 @@ class OctaveStable < Formula
     inreplace "src/mkoctfile.in.cc", /%OCTAVE_CONF_OCT(AVE)?_LINK_(DEPS|OPTS)%/, '""'
 
     # Pick up non-linked libraries
-    ENV.append "CXXFLAGS", "-I#{Formula["sundials27-octave-app_2.7.0"].opt_include}"
+    ENV.append "CXXFLAGS", "-I#{Formula["sundials27-octave-app"].opt_include}"
     ENV.append "CXXFLAGS", "-I#{Formula["qscintilla2-octave-app"].opt_include}"
     ENV.append "LDFLAGS", "-L#{Formula["qscintilla2-octave-app"].opt_lib}"
 
