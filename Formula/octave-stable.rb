@@ -105,8 +105,8 @@ class OctaveStable < Formula
 
     # Pick up non-linked libraries
     ENV.append "CXXFLAGS", "-I#{Formula["sundials27-octave-app"].opt_include}"
-    ENV.append "CXXFLAGS", "-I#{Formula["qscintilla2-octave-app"].opt_include}"
-    ENV.append "LDFLAGS", "-L#{Formula["qscintilla2-octave-app"].opt_lib}"
+    ENV.append "CXXFLAGS", "-I#{Formula["qscintilla2"].opt_include}"
+    ENV.append "LDFLAGS", "-L#{Formula["qscintilla2"].opt_lib}"
 
     args = [
       "--prefix=#{prefix}",
