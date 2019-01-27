@@ -133,6 +133,14 @@ class OctaveOctaveApp < Formula
       args << "--without-qt"
     else
       args << "--with-qt=5"
+      # Qt 5.12 merged qcollectiongenerator into qhelpgenerator, and Octave's
+      # source hasn't been updated to auto-detect this yet.
+      ENV['QCOLLECTIONGENERATOR']='qhelpgenerator'
+      # These "shouldn't" be necessary, but the build breaks if I don't include them.
+      ENV['QT_CPPFLAGS']="-I#{Formula["qt"].opt_include}"
+      ENV.append 'CPPFLAGS', "-I#{Formula["qt"].opt_include}"
+      ENV['QT_LDFLAGS']="-F#{Formula["qt"].opt_lib}"
+      ENV.append 'LDFLAGS', "-F#{Formula["qt"].opt_lib}"
     end
 
     if build.without? "docs"
@@ -171,7 +179,7 @@ class OctaveOctaveApp < Formula
         f.write("<?xml version=\"1.0\" encoding=\"utf-8\" ?>")
         f.write("<QHelpCollectionProject version=\"1.0\" />")
       end
-      system "#{Formula["qt-octave-app"].opt_bin}/qcollectiongenerator", "doc/octave_interpreter.qhcp", "-o", "doc/octave_interpreter.qhc"
+      system "#{Formula["qt-octave-app"].opt_bin}/qhelpgenerator", "doc/octave_interpreter.qhcp", "-o", "doc/octave_interpreter.qhc"
       (pkgshare/"#{version}/doc").install "doc/octave_interpreter.qhc"
     end
   end
