@@ -26,6 +26,11 @@ class OctaveOctaveApp < Formula
   url "ftp://ftp.gnu.org/gnu/octave/octave-4.4.1.tar.lz"
   sha256 "1e6e3a72b4fd4b4db73ccb9f3046e4f727201c2e934b77afb04a804d7f7c4d4b"
 
+  devel do
+    url "ftp://alpha.gnu.org/gnu/octave/octave-5.0.90.tar.lz"
+    sha256 "640bd367858f4b33e0731938541ea15189721c567cb5560ff325da3876b86e6c"
+  end
+
   option "without-qt", "Compile without qt-based graphical user interface"
   option "without-docs", "Skip documentation (requires MacTeX)"
   option "with-test", "Do compile-time make checks"
