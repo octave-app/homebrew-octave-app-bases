@@ -49,8 +49,8 @@ class OctaveOctaveApp < Formula
   depends_on "ghostscript"
   depends_on "gl2ps"
   depends_on "glpk"
-  depends_on "gnuplot-octave-app"
-  depends_on "gnu-tar-octave-app"
+  depends_on "gnuplot"
+  depends_on "gnu-tar"
   depends_on "graphicsmagick"
   depends_on "hdf5"
   depends_on "libsndfile"
@@ -70,8 +70,8 @@ class OctaveOctaveApp < Formula
 
   # Dependencies for the graphical user interface
   if build.with?("qt")
-    depends_on "qt-octave-app"
-    depends_on "qscintilla2-octave-app"
+    depends_on "qt"
+    depends_on "qscintilla2"
 
     # Fix bug #49053: retina scaling of figures
     # see https://savannah.gnu.org/bugs/?49053
@@ -106,8 +106,8 @@ class OctaveOctaveApp < Formula
 
     # Pick up keg-only libraries
     ENV.append "CXXFLAGS", "-I#{Formula["sundials27-octave-app"].opt_include}"
-    ENV.append "CXXFLAGS", "-I#{Formula["qscintilla2-octave-app"].opt_include}"
-    ENV.append "LDFLAGS", "-L#{Formula["qscintilla2-octave-app"].opt_lib}"
+    ENV.append "CXXFLAGS", "-I#{Formula["qscintilla2"].opt_include}"
+    ENV.append "LDFLAGS", "-L#{Formula["qscintilla2"].opt_lib}"
 
     args = [
       "--prefix=#{prefix}",
@@ -179,7 +179,7 @@ class OctaveOctaveApp < Formula
         f.write("<?xml version=\"1.0\" encoding=\"utf-8\" ?>")
         f.write("<QHelpCollectionProject version=\"1.0\" />")
       end
-      system "#{Formula["qt-octave-app"].opt_bin}/qhelpgenerator", "doc/octave_interpreter.qhcp", "-o", "doc/octave_interpreter.qhc"
+      system "#{Formula["qt"].opt_bin}/qhelpgenerator", "doc/octave_interpreter.qhcp", "-o", "doc/octave_interpreter.qhc"
       (pkgshare/"#{version}/doc").install "doc/octave_interpreter.qhc"
     end
   end
