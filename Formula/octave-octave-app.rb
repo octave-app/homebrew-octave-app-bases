@@ -73,11 +73,13 @@ class OctaveOctaveApp < Formula
     depends_on "qt"
     depends_on "qscintilla2"
 
-    # Fix bug #49053: retina scaling of figures
-    # see https://savannah.gnu.org/bugs/?49053
-    patch do
-      url "https://savannah.gnu.org/support/download.php?file_id=44041"
-      sha256 "bf7aaa6ddc7bd7c63da24b48daa76f5bdf8ab3a2f902334da91a8d8140e39ff0"
+    if build.stable?
+      # Fix bug #49053: retina scaling of figures
+      # see https://savannah.gnu.org/bugs/?49053
+      patch do
+        url "https://savannah.gnu.org/support/download.php?file_id=44041"
+        sha256 "bf7aaa6ddc7bd7c63da24b48daa76f5bdf8ab3a2f902334da91a8d8140e39ff0"
+      end
     end
 
     # Fix bug #50025: Octave window freezes
