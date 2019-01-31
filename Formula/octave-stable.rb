@@ -39,7 +39,7 @@ class OctaveStable < Formula
   depends_on "pkg-config" => :build
   # Head-specific build dependencies
   depends_on "mercurial" => :build
-  depends_on "bison" => :build
+  depends_on "bison@3.2" => :build
   depends_on "doxygen" => :build
   depends_on "icoutils" => :build
   depends_on "librsvg" => :build
