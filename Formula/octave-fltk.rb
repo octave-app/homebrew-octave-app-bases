@@ -62,7 +62,7 @@ class OctaveFltk < Formula
   depends_on "qrupdate"
   depends_on "readline"
   depends_on "suite-sparse"
-  depends_on "sundials27-octave-app"
+  depends_on "sundials@2"
   depends_on "texinfo" # http://lists.gnu.org/archive/html/octave-maintainers/2018-01/msg00016.html
   depends_on "veclibfort"
   depends_on :java => ["1.8", :recommended]
@@ -106,7 +106,7 @@ class OctaveFltk < Formula
     # cause linking problems.
     inreplace "src/mkoctfile.in.cc", /%OCTAVE_CONF_OCT(AVE)?_LINK_(DEPS|OPTS)%/, '""'
 
-    ENV.append "CFLAGS", "-I#{Formula["sundials27-octave-app"].opt_include}"
+    ENV.append "CFLAGS", "-I#{Formula["sundials@2"].opt_include}"
 
     args = [
       "--prefix=#{prefix}",

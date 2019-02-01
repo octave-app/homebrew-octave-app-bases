@@ -1,3 +1,4 @@
 {
-  "octave-head": "octave-default"
+  "octave-head": "octave-default",
+  "sundials27-octave-app": "sundials@2"
 }

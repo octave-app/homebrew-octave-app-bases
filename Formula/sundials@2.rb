@@ -1,4 +1,4 @@
-class Sundials27OctaveApp < Formula
+class SundialsAt2 < Formula
   desc "Nonlinear and differential/algebraic equations solver"
   homepage "https://computation.llnl.gov/casc/sundials/main.html"
   # The official download site is always really slow, so use a mirror instead
@@ -7,7 +7,7 @@ class Sundials27OctaveApp < Formula
   mirror "https://computation.llnl.gov/projects/sundials/download/sundials-2.7.0.tar.gz"
   sha256 "d39fcac7175d701398e4eb209f7e92a5b30a78358d4a0c0fcc23db23c11ba104"
 
-  keg_only "conflicts with regular sundials"
+  keg_only :versioned_formula
 
   option "with-openmp", "Enable OpenMP multithreading"
   option "without-mpi", "Do not build with MPI"
