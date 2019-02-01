@@ -1,4 +1,4 @@
-class SundialsAt2 < Formula
+class SundialsAT2 < Formula
   desc "Nonlinear and differential/algebraic equations solver"
   homepage "https://computation.llnl.gov/casc/sundials/main.html"
   # The official download site is always really slow, so use a mirror instead
