@@ -16,8 +16,8 @@ class SundialsAT2 < Formula
   depends_on "python" => :build
   depends_on "gcc" # for gfortran
   depends_on "open-mpi" if build.with? "mpi"
-  depends_on "suite-sparse"
   depends_on "openblas"
+  depends_on "suite-sparse"
 
   fails_with :clang if build.with? "openmp"
 
