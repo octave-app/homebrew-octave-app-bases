@@ -24,6 +24,8 @@ class OctaveOctaveAppVanillaQt < Formula
   url "ftp://ftp.gnu.org/gnu/octave/octave-4.4.1.tar.lz"
   sha256 "1e6e3a72b4fd4b4db73ccb9f3046e4f727201c2e934b77afb04a804d7f7c4d4b"
 
+  keg_only "so it can be installed alongside regular octave"
+
   option "without-qt", "Compile without qt-based graphical user interface"
   option "without-docs", "Skip documentation (requires MacTeX)"
   option "with-test", "Do compile-time make checks"

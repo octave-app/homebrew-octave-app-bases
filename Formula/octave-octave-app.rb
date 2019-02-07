@@ -27,9 +27,11 @@ class OctaveOctaveApp < Formula
   sha256 "1e6e3a72b4fd4b4db73ccb9f3046e4f727201c2e934b77afb04a804d7f7c4d4b"
 
   devel do
-    url "ftp://alpha.gnu.org/gnu/octave/octave-5.0.90.tar.lz"
+    url "ftp://alpha.gnu.org/gnu/octave/octave-5.0.91.tar.lz"
     sha256 "640bd367858f4b33e0731938541ea15189721c567cb5560ff325da3876b86e6c"
   end
+
+  keg_only "so it can be installed alongside regular octave"
 
   option "without-qt", "Compile without qt-based graphical user interface"
   option "without-docs", "Skip documentation (requires MacTeX)"
@@ -185,6 +187,10 @@ class OctaveOctaveApp < Formula
       system "#{Formula["qt"].opt_bin}/qhelpgenerator", "doc/octave_interpreter.qhcp", "-o", "doc/octave_interpreter.qhc"
       (pkgshare/"#{version}/doc").install "doc/octave_interpreter.qhc"
     end
+  end
+
+  def post_install
+    system "ln", "-sf", "#{bin}/octave", "#{HOMEBREW_PREFIX}/bin/octave-octave-app"
   end
 
   test do
